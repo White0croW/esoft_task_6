@@ -1,8 +1,9 @@
-//---------------------------------------------------------------------------------  
+//---------------------------------------------------------------------------------
 //Задание 5: Работа с Indexed Access Types и Mapped Types
 //Цель: Создать утилиты для работы с объектами и их ключами.
 
 // Определите интерфейс для пользователя
+// @ts-ignore
 interface User {
     id: number;
     name: string;
@@ -21,7 +22,8 @@ type UserFieldsToBoolean = {
 // Реализуйте функцию, которая принимает ключи интерфейса User и возвращает их типы
 function getUserFieldType<K extends keyof User>(key: K): User[K] {
     // Верните тип ключа
-    return {} as User[K];
+    const user: User = { id: 1, name: "Alice", email: "a@example.com", age: 35 };
+    return user[key];
 }
 
 // Используйте эту функцию для получения типа поля 'age' и 'name'

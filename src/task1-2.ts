@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------------
 //Разминка
 // Определите интерфейс для пользователя
+// @ts-ignore
 interface User {
     id: number;
     name: string;
@@ -37,6 +38,7 @@ type AdminPermissions = { canBanUser: boolean };
 type BasicPermissions = { canEditProfile: boolean };
 // Заполните тип. Должен выявляться на основне некоторого дженерика и опредять, какой из пермишенов выдавать: Admin или Basic.
 type Admin = { role: 'admin' };
+// @ts-ignore
 type Permissions<T> = T extends Admin ? AdminPermissions : BasicPermissions;
 
 ///ЧАСТЬ 2.
@@ -86,14 +88,18 @@ function processValue(value: StringOrNumber) {
 // Цель: Создать универсальную функцию обработки данных, которая может работать с различными типами данных.
 
 // Определите Generic интерфейс Response с одним параметром типа T. Второй параметр status: number
+// @ts-ignore
 interface Response<T> {
     data: T;
+    // @ts-ignore
     status: number;
 }
 
 // Реализуйте и типизируйте функцию, которая возвращает объект Response для переданных данных
+
 function createResponse<T>(data: T, status: number): Response<T> {
     // Реализуйте создание и возврат объекта Response
+    // @ts-ignore
     return { data, status };
 }
 

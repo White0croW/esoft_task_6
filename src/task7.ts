@@ -26,6 +26,18 @@ function findInArray<T, K extends keyof T>(items: T[], key: K, value: T[K]): T |
     return items.find(item => item[key] === value);
 }
 
+function findInArrayByCriteria<T extends object, K extends keyof T>(items: T[], keyOrCriteria: K | Partial<T>, value?: T[K]): T | undefined {
+    if (typeof keyOrCriteria === 'string') {
+        return items.find(item => item[keyOrCriteria] === value);
+    } else {
+        return items.find(item =>
+            Object.entries(keyOrCriteria).every(([k, v]) =>
+                item.hasOwnProperty(k) && (item as any)[k] === v
+            )
+        );
+    }
+}
+
 // Данные для тестирования функции
 const users: User[] = [
     { id: 1, name: "Alice", age: 25 },
@@ -49,7 +61,7 @@ const foundProduct = findInArray(products, 'price', 500);
 // 3. Найдите книгу по автору "Another One".
 const foundBook = findInArray(books, 'author', 'Another One');
 //---------------------------------------------------------------------------------
-
+const userByCriteria = findInArrayByCriteria(users, { name: 'Bob', age: 30 });
 
 
 
