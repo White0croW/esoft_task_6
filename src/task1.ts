@@ -38,3 +38,45 @@ type BasicPermissions = { canEditProfile: boolean };
 // Заполните тип. Должен выявляться на основне некоторого дженерика и опредять, какой из пермишенов выдавать: Admin или Basic.
 type Admin = { role: 'admin' };
 type Permissions<T> = T extends Admin ? AdminPermissions : BasicPermissions;
+
+///ЧАСТЬ 2.
+
+// Определите Type Alias для Union типа String или Number
+type StringOrNumber = string | number;// Заполните тип
+
+// Реализуйте функцию logMessage, которая принимает StringOrNumber и не возвращает значение (void)
+function logMessage(message: StringOrNumber): void {
+    // Реализуйте вывод сообщения в консоль
+    console.log(message);
+}
+
+// Реализуйте функцию throwError, которая никогда не возвращает управление (never)
+function throwError(errorMsg: string): never {
+    // Бросьте исключение с errorMsg
+    throw new Error(errorMsg);
+}
+
+// Реализуйте Type Guard для проверки, является ли значение строкой
+function isString(value: StringOrNumber): value is string {
+    // Верните результат проверки типа
+    return typeof value === 'string';
+}
+
+// Реализуйте функцию assertIsNumber, которая использует asserts для утверждения типа number
+function assertIsNumber(value: any): asserts value is number {
+    // Бросьте исключение, если значение не является числом
+    if (typeof value !== 'number') {
+        throw new Error('Value is not a number');
+    }
+}
+
+// Завершите функцию processValue, используя isString и assertIsNumber
+function processValue(value: StringOrNumber) {
+    // Реализуйте логику проверки и обработки значения
+    if (isString(value)) {
+        console.log(`String value: ${value.toUpperCase()}`);
+    } else {
+        assertIsNumber(value);
+        console.log(`Number value: ${value.toFixed(2)}`);
+    }
+}
