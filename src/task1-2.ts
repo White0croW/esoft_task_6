@@ -80,3 +80,30 @@ function processValue(value: StringOrNumber) {
         console.log(`Number value: ${value.toFixed(2)}`);
     }
 }
+
+//---------------------------------------------------------------------------------
+// Задание 2: Расширенное использование Generics
+// Цель: Создать универсальную функцию обработки данных, которая может работать с различными типами данных.
+
+// Определите Generic интерфейс Response с одним параметром типа T. Второй параметр status: number
+interface Response<T> {
+    data: T;
+    status: number;
+}
+
+// Реализуйте и типизируйте функцию, которая возвращает объект Response для переданных данных
+function createResponse<T>(data: T, status: number): Response<T> {
+    // Реализуйте создание и возврат объекта Response
+    return { data, status };
+}
+
+// Используйте функцию createResponse для создания ответа с массивом чисел
+const numericResponse = createResponse<number[]>([1, 2, 3], 200);// Заполните вызов функции
+
+// Используйте функцию createResponse для создания ответа с объектом пользователя (User)
+const userResponse = createResponse<User>(
+    { id: 1, name: "Alice", email: "a@example.com" },
+    200
+); // Заполните вызов функции
+//---------------------------------------------------------------------------------
+
